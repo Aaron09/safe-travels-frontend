@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-const backend_url = "http://127.0.0.1:8000/";
-
 class CountyInfo extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +9,7 @@ class CountyInfo extends Component {
 
   componentDidMount() {
     axios
-      .get(backend_url + "county/" + this.props.id)
+      .get(process.env.REACT_APP_API_URL + "county/" + this.props.id)
       .then(response => {
         this.setState({
           name: response.data.name,
