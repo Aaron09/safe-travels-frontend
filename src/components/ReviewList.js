@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Review from "./Review";
 
-const backend_url = "http://127.0.0.1:8000/";
-
 class ReviewList extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +14,7 @@ class ReviewList extends Component {
 
   getReviews = () => {
     axios
-      .get(backend_url + "review/all/" + this.props.id)
+      .get(process.env.REACT_APP_API_URL + "review/all/" + this.props.id)
       .then(response => {
         this.setState({
           data: response.data.reviews
@@ -29,7 +27,7 @@ class ReviewList extends Component {
 
   deleteReview = (review_id) => {
     axios
-      .delete(backend_url + "review/delete/" + review_id + "/")
+      .delete(process.env.REACT_APP_API_URL + "review/delete/" + review_id + "/")
       .then(response => {
         this.getReviews();
       })
@@ -40,7 +38,7 @@ class ReviewList extends Component {
 
   updateReview = (review_id, newDesc, newRating) => {
     axios
-      .post(backend_url + "review/edit/" + review_id + "/", {
+      .post(process.env.REACT_APP_API_URL + "review/edit/" + review_id + "/", {
         "description": newDesc,
         "rating": newRating,
       })

@@ -19,17 +19,17 @@ class Review extends Component {
     }
   }
 
-  cancelEdit = (e) => {
+  cancelEdit = e => {
     e.preventDefault();
     this.setState({showEdit: false, newDesc: "", newRating: ""});
   }
 
-  updateReview = (e) => {
-    if (isNaN(this.props.newRating) || this.state.newDesc.length === 0) {
-      this.cancelEdit();
-    } else {
-      e.preventDefault();
+  updateReview = e => {
+    e.preventDefault();
 
+    if (isNaN(this.state.newRating) || this.state.newDesc.length === 0) {
+      this.cancelEdit(e);
+    } else {
       this.props.update(
         this.props.review.id,
         this.state.newDesc,
@@ -64,7 +64,7 @@ class Review extends Component {
           />
           <br />
           <button onClick={this.cancelEdit}>Cancel</button>
-          <button onClick={(e) => this.updateReview(e)}>Submit</button>
+          <button onClick={this.updateReview}>Submit</button>
         </form>
       </div>
     );

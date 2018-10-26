@@ -22,7 +22,7 @@ class CreateReview extends Component {
     }
 
     axios
-      .post(process.env.API_URL + "review/create/" + this.props.id + "/", {
+      .post(process.env.REACT_APP_API_URL + "review/create/" + this.props.id + "/", {
         "description": description,
         "rating": parseInt(rating),
       })
