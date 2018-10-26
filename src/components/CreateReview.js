@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-const backend_url = "http://127.0.0.1:8000/";
-
 class CreateReview extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +22,7 @@ class CreateReview extends Component {
     }
 
     axios
-      .post(backend_url + "review/create/" + this.props.id + "/", {
+      .post(process.env.API_URL + "review/create/" + this.props.id + "/", {
         "description": description,
         "rating": parseInt(rating),
       })
