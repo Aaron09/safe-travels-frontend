@@ -1,0 +1,28 @@
+/* .image-viewer-div {
+    width: 50%;
+} */
+
+.master-container {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.right-master-container {
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.left-master-container {
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+}
+
+.bold-text {
+    font-weight: bold;
+}

@@ -1,0 +1,15 @@
+.image-list-container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.image-container {
+    display: inline;
+    padding-left: .5%;
+    padding-right: .5%;
+}
+
+.county-image {
+    width: 25%;
+}

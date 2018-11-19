@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ImageList from "./ImageList"
+import ImageUpload from "./ImageUpload"
+import CrimeDisplay from "./CrimeDisplay"
+import "../styles/CountyInfo.css"
+import CreateReview from "./CreateReview";
+import ReviewList from "./ReviewList";
 
 class CountyInfo extends Component {
   constructor(props) {
@@ -16,6 +22,7 @@ class CountyInfo extends Component {
           state: response.data.state,
           population: response.data.population,
           imageUrls: response.data.image_urls,
+          crimes: response.data.crimes,
           loaded: true
         });
       })
@@ -31,56 +38,35 @@ class CountyInfo extends Component {
       });
   }
 
-  uploadPhoto = e => {
-    e.preventDefault();
-
-    var input = this.refs["county-file-upload"]
-    if (!input.files) {
-      return;
-    }
-
-    var image = input.files[0];
-
-    var formData = new FormData();
-    formData.append("image", image);
-
-    axios
-      .post(
-        process.env.REACT_APP_API_URL + "picture/new/" + this.props.id + "/",
-        formData,
-        { headers: {'Content-Type': 'multipart/form-data'}},
-      )
-      .then(() => {
-        console.log("Success");
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-
   render() {
     return (
-      <div className="App">
+      <div className="master-container">
         {this.state.loaded ? (
           <div>
-            <div>Name: {this.state.name}</div>
-            <div>State: {this.state.state}</div>
-            <div>Population: {this.state.population}</div>
-            <span>Share a photo of {this.state.name}!</span>
-            <br></br>
-            <form>
-              <input type="file" ref="county-file-upload" accept="image/png, image/jpeg"></input>
-              <button onClick={this.uploadPhoto}>Upload</button>
-            </form>
-            <br></br>
-            <br></br>
-            <div>
-              <span>All photos of {this.state.name}</span>
-              {this.state.imageUrls.map(url => (
-                <img key={url} src={url} alt={"Unavailable."}></img>
-              ))}
+            <div className="center-text">
+              <h5>{this.state.name}, {this.state.state}</h5>
             </div>
-            <iframe name="hiddenFrame" width="0" height="0" border="0" style={{display: "none"}}></iframe>
+
+            <div className="left-master-container">
+              <span className="bold-text">Share a photo of {this.state.name}!</span>
+              <ImageUpload id={this.props.id} />
+              <div className="image-viewer-div">
+                <ImageList imageUrls={this.state.imageUrls} />
+              </div>
+
+              <h6 className="bold-text">Been to {this.state.name}? Share your thoughts!</h6>
+              <CreateReview id={this.props.id} />
+            </div>
+
+            <div className="right-master-container">
+              <CrimeDisplay crimes={this.state.crimes} population={this.state.population} />
+            </div>
+
+            <div className="center-text">
+              <h6 className="bold-text">Read some reviews below!</h6>
+            </div>
+            <hr></hr>
+            <ReviewList id={this.props.id} />
           </div>
         ) : (
           <div>None</div>
