@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "../styles/Review.css"
+import { CardPanel } from "react-materialize"
 
 class Review extends Component {
   constructor(props) {
@@ -40,12 +42,22 @@ class Review extends Component {
     }
   }
 
+  date = (timestamp) => {
+    return timestamp.substring(0, timestamp.indexOf("T"))
+  }
+
   render() {
     return (
       <div className="review">
-        <div>Description: {this.props.review.description}</div>
-        <div>Rating: {this.props.review.rating}</div>
-        <div>Timestamp: {this.props.review.timestamp}</div>
+
+        <CardPanel>
+          <div className="review-container">
+            <h5 className="review-rating">Score: {this.props.review.rating}</h5>
+            <h6 className="review-description">{this.props.review.description}</h6>
+            <h6 className="review-date">{this.date(this.props.review.timestamp)}</h6>
+          </div>
+        </CardPanel>
+
         <div>
             <button onClick={this.editReview}>Edit</button>
             <button onClick={() => this.props.delete(this.props.review.id)}>Delete</button>

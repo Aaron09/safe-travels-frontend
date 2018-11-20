@@ -7,6 +7,11 @@ class CrimeDisplay extends Component {
     super(props);
   }
 
+  perNumberOfPeople = (count, numberOfPeople) => {
+    var value = count / this.props.population * numberOfPeople;
+    return value.toFixed(2);
+  }
+
   render() {
     return (
         <CardPanel className="teal lighten-4 black-text">
@@ -16,7 +21,7 @@ class CrimeDisplay extends Component {
             <Collection>
                 {this.props.crimes.map(crime => (
                     <CollectionItem key={crime["type"]}>
-                        <span>{crime["type"]}: {crime["count"]}</span>
+                        <span>{crime["type"]}: {this.perNumberOfPeople(crime["count"], 100)} counts per 100 people ({crime["count"]} total)</span>
                     </CollectionItem>
                 ))}
             </Collection>
