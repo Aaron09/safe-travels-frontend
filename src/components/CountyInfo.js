@@ -6,6 +6,8 @@ import CrimeDisplay from "./CrimeDisplay"
 import "../styles/CountyInfo.css"
 import CreateReview from "./CreateReview";
 import ReviewList from "./ReviewList";
+import { Link } from 'react-router-dom'
+
 
 class CountyInfo extends Component {
   constructor(props) {
@@ -71,6 +73,9 @@ class CountyInfo extends Component {
         ) : (
           <div>None</div>
         )}
+        <Link to="/">
+          <button>Back to Home</button>
+        </Link>
       </div>
     );
   }

@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App } from "./components";
+import { App, HomePage } from "./components";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 ReactDOM.render(
   <Router>
     <div>
+      <Route exact path="/" component={HomePage} />
       <Route exact path="/county/:id" component={App} />
     </div>
   </Router>,
