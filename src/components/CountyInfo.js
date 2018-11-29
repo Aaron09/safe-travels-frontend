@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 class CountyInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = { loaded: false, imageUrls: [] };
+    this.state = { loaded: false, imageUrls: [], refresh: 0 };
   }
 
   componentDidMount() {
@@ -57,7 +57,7 @@ class CountyInfo extends Component {
               </div>
 
               <h6 className="bold-text">Been to {this.state.name}? Share your thoughts!</h6>
-              <CreateReview id={this.props.id} />
+              <CreateReview id={this.props.id} onClick={() => {this.setState({refresh: this.state.refresh + 1})}}/>
             </div>
 
             <div className="right-master-container">
@@ -68,7 +68,7 @@ class CountyInfo extends Component {
               <h6 className="bold-text">Read some reviews below!</h6>
             </div>
             <hr></hr>
-            <ReviewList id={this.props.id} />
+            <ReviewList id={this.props.id} re={this.state.refresh} />
           </div>
         ) : (
           <div>None</div>

@@ -32,6 +32,7 @@ class CreateReview extends Component {
           description: "",
           rating: ""
         });
+        this.props.onClick()
       })
       .catch(e => {
         console.log(e);
