@@ -7,6 +7,29 @@
     padding-right: 1%;
 }
 
+.center-transparent-box {
+    width: 75%;
+    min-height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 12.5%;
+    background-color: #ffffff;
+    border: 1px solid grey;
+    opacity: 0.6;
+    filter: alpha(opacity=60);   
+    text-align: center;
+    display: inline-block;
+}
+
+.background-container {
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0px;
+    background-image: url("../images/homepage-background.jpg");
+    background-size: cover;
+}
+
 .center-text {
     text-align: center;
 }

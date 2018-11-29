@@ -29,14 +29,17 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div className="master-container">
-        <h1>Welcome to SafeTravels!</h1>
-        <Typeahead options={this.state.counties} onChange={selected => this.setState({selected})}/>
-        {this.state.selected.length > 0 ? (<Link to={"/county/" + this.state.selected[0].id}>
-          <button className="searchButton" type="submit">
-            Submit
-          </button>
-        </Link>) : (<div/>)}
+      <div className="background-container">
+        <div className="center-transparent-box">
+          <h1>Welcome to SafeTravels!</h1>
+          <h5>Start typing a county...</h5>
+          <Typeahead options={this.state.counties} onChange={selected => this.setState({selected})}/>      
+          {this.state.selected.length > 0 ? (<Link to={"/county/" + this.state.selected[0].id}>
+            <button className="searchButton" type="submit">
+              Submit
+            </button>
+          </Link>) : (<div/>)}
+        </div>
       </div>
     );
   }
