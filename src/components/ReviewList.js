@@ -16,10 +16,6 @@ class ReviewList extends Component {
     this.getReviews()
   }
 
-  componentShouldUpdate = (nextProps, nextState) => {
-    return this.props.re !== nextProps.re || this.props.id !== nextProps.re
-  }
-
   getReviews = () => {
     axios
       .get(process.env.REACT_APP_API_URL + "review/all/" + this.props.id)

@@ -12,10 +12,10 @@ import { Link } from 'react-router-dom'
 class CountyInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = { loaded: false, imageUrls: [], refresh: 0 };
+    this.state = { loaded: false, imageUrls: [], refresh: 0, rating: "N/A", similar: [] };
   }
 
-  componentDidMount() {
+  get_data = () => {
     axios
       .get(process.env.REACT_APP_API_URL + "county/" + this.props.id)
       .then(response => {
@@ -38,6 +38,38 @@ class CountyInfo extends Component {
           loaded: true
         });
       });
+
+    axios
+      .get(process.env.REACT_APP_API_URL + "county_rating/" + this.props.id)
+      .then(response => {
+        this.setState({
+          rating: response.data.rating[0][2]
+        });
+      })
+      .catch(e => {
+        console.log(e.message);
+      });
+
+    axios
+      .get(process.env.REACT_APP_API_URL + "county_similar/" + this.props.id)
+      .then(response => {
+        this.setState({
+          similar: response.data.counties
+        });
+      })
+      .catch(e => {
+        console.log(e.message);
+      });
+  }
+
+  componentDidMount = () => {
+    this.get_data()
+  }
+
+  componentWillReceiveProps = () => {
+    this.setState({ loaded: false, imageUrls: [], refresh: 0, rating: "N/A", similar: [] })
+    this.get_data()
+    console.log("bla")
   }
 
   render() {
@@ -65,10 +97,20 @@ class CountyInfo extends Component {
             </div>
 
             <div className="center-text">
-              <h6 className="bold-text">Read some reviews below!</h6>
+              {this.state.rating && this.state.rating !== "N/A" ? 
+              (<h6 className="bold-text">Read some reviews below! The rating is {this.state.rating}</h6>)
+              :
+              (<h6 className="bold-text">Read some reviews below!</h6>)}
             </div>
             <hr></hr>
             <ReviewList id={this.props.id} re={this.state.refresh} />
+            <div className="center-text">
+              <h6 className="bold-text">Similar Counties</h6>
+            </div>
+            <hr></hr>
+            {this.state.similar.map(c => (
+              <><a href={window.location.href.substr(0, window.location.href.lastIndexOf('/')) + '/' + c.county_id} className="center-text">{c.name}</a><br /></>
+            ))}
           </div>
         ) : (
           <div>None</div>
