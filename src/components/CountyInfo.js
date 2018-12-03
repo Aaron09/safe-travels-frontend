@@ -43,7 +43,7 @@ class CountyInfo extends Component {
       .get(process.env.REACT_APP_API_URL + "county_rating/" + this.props.id)
       .then(response => {
         this.setState({
-          rating: response.data.rating[0][2]
+          rating: response.data.rating[0][0]
         });
       })
       .catch(e => {
